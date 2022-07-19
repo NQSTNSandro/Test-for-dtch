@@ -20,9 +20,9 @@ public class Cadastralquarters {
     @Column(name = "CQ")
     private String cq;
     @Column(name = "oks_counter")
-    private Integer Okscount=0;
+    private Integer Okscount;
     @Column(name = "full_size")
-    private Integer Fullsize=0;
+    private Double Fullsize;
     @Column(name = "average_size")
-    private Integer Averagesize=0;
+    private Double Averagesize;
 }

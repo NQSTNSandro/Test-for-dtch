@@ -19,6 +19,19 @@ public class RegionService {
         if(cq!=null) regionRepository.findByCq(cq);
         return regionRepository.findAll();
     }
+    public Double fullSize(String cq){
+        Integer index=0;
+        Double sum=0.0;
+        while(index!=regionRepository.findAllByCq(cq).size()){
+            sum+=regionRepository.findAllSizeByCq(cq).get(index).getSize();
+            index++;
+        }
+        return sum;
+    }
+    public Double averageSize(String cq){
+
+        return fullSize(cq)/regionRepository.findAllByCq(cq).size();
+    }
     public void saveRegion(Region region)
     {
         log.info("Saving new{}", region);

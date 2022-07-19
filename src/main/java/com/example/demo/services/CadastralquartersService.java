@@ -16,6 +16,7 @@ import java.util.List;
 public class CadastralquartersService {
     private final CadastralquartersRepository cadastralquartersRepository;
     private final OKSRepository oksRepository;
+    private final RegionService regionService;
     private final OKSService oksService;
     public List<Cadastralquarters> listCq(String cq){
         List<Cadastralquarters> cadastralquarters= cadastralquartersRepository.findAll();
@@ -26,7 +27,10 @@ public class CadastralquartersService {
 
     public  void  saveCq(Cadastralquarters cadastralquarters){
         log.info("Saving new{}",cadastralquarters);
+
         cadastralquarters.setOkscount(oksService.listOksCq(cadastralquarters.getCq()));
+        cadastralquarters.setAveragesize(regionService.averageSize(cadastralquarters.getCq()));
+        cadastralquarters.setFullsize(regionService.fullSize(cadastralquarters.getCq()));
         cadastralquartersRepository.save(cadastralquarters);
 
     }
