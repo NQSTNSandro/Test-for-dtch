@@ -20,5 +20,11 @@
     Принадлежность к кадастровому объекту <input type="text" name="cq"/>
     <input type="submit" value="Добавить участок"/>
 </form>
+<h1>Кк</h1><hr>
+<h4>Добавьте кк</h4>
+<form action="/cq/create" method="post">
+    К к <input type="text" name="cq"/>
+    <input type="submit" value="Добавить кк"/>
+</form>
 </body>
 </html>

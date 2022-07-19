@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OKSRepository extends JpaRepository<OKS,Long> {
     List<OKS> findByCq(String cq);
+    List<OKS> findAllByCq(String cq);
+
 }

@@ -16,14 +16,18 @@ import java.util.List;
 public class CadastralquartersService {
     private final CadastralquartersRepository cadastralquartersRepository;
     private final OKSRepository oksRepository;
+    private final OKSService oksService;
     public List<Cadastralquarters> listCq(String cq){
         List<Cadastralquarters> cadastralquarters= cadastralquartersRepository.findAll();
         if (cq != null) cadastralquartersRepository.findByCq(cq);
         return cadastralquartersRepository.findAll();
     }
 
+
     public  void  saveCq(Cadastralquarters cadastralquarters){
         log.info("Saving new{}",cadastralquarters);
+        cadastralquarters.setOkscount(oksService.listOksCq(cadastralquarters.getCq()));
         cadastralquartersRepository.save(cadastralquarters);
+
     }
 }

@@ -18,6 +18,7 @@ public class Cadastralquartersontroller {
         model.addAttribute("cq", cadastralquartersService.listCq(cq));
         return "page";
     }
+
     @PostMapping("cq/create")
     private String createCq(Cadastralquarters cadastralquarters){
 

@@ -19,6 +19,9 @@ public class OKSService {
         if (cq != null) oksRepository.findByCq(cq);
         return oksRepository.findAll();
     }
+    public Integer listOksCq(String cq){
+        return oksRepository.findAllByCq(cq).size();
+    }
     public void saveOks(OKS oks){
         log.info("Saving new{}",oks);
         oksRepository.save(oks);
