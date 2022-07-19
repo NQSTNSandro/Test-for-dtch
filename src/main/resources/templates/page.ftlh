@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Окс</title>
+    <title>Кадастровые участки</title>
 </head>
 <body>
 <h1>Окс</h1><hr>
@@ -11,6 +11,14 @@
     Принадлежность к кадастровому объекту <input type="text" name="cq"/>
     <input type="submit" value="Добавить окс"/>
 
+</form>
+<hr>
+<h1>Участки</h1><hr>
+<h4>Добавьте участок</h4>
+<form action="/regions/create" method="post">
+    Размер участка <input type="text" name="size"/>
+    Принадлежность к кадастровому объекту <input type="text" name="cq"/>
+    <input type="submit" value="Добавить участок"/>
 </form>
 </body>
 </html>

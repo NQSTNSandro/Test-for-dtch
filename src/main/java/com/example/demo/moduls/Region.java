@@ -1,5 +1,6 @@
 package com.example.demo.moduls;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,21 +8,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "OKS")
+@Table(name = "Regions")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OKS {
+public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long Id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "cq")
+    @Column(name="id")
+    private Long id;
+    @Column(name="size")
+    private Double size;
+    @Column(name="cq")
     private String cq;
-
-
-
 
 }
