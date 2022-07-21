@@ -18,6 +18,7 @@
 <form action="/regions/create" method="post">
     Размер участка <input type="text" name="size"/>
     Принадлежность к кадастровому объекту <input type="text" name="cq"/>
+    Адресс <input type="text" name="adress"/>
     <input type="submit" value="Добавить участок"/>
 </form>
 <h1>Кк</h1><hr>

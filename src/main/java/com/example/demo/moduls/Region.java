@@ -21,5 +21,7 @@ public class Region {
     private Double size;
     @Column(name="cq")
     private String cq;
+    @Column(name="adress")
+    private String adress;
 
 }
