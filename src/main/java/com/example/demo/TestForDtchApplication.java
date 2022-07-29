@@ -10,7 +10,5 @@ public class TestForDtchApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TestForDtchApplication.class, args);
-	}
-
-
+			}
 }
