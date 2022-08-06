@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.SneakyThrows;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @EnableAutoConfiguration
 public class TestForDtchApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TestForDtchApplication.class, args);
-			}
+	@SneakyThrows
+	public static void main(String[] args) {SpringApplication.run(TestForDtchApplication.class, args);}
 }

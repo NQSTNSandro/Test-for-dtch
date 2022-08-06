@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class Cadastralquartersontroller {
     private final CadastralquartersService cadastralquartersService;
-    @GetMapping("cq/")
+    @GetMapping("/")
     public String cadastralquarters(@RequestParam(name = "cq",required = false)String cq, Model model) {
         model.addAttribute("cq", cadastralquartersService.listCq(cq));
         return "page";
@@ -25,4 +25,5 @@ public class Cadastralquartersontroller {
         cadastralquartersService.saveCq(cadastralquarters);
         return "redirect:/";
     }
+
 }

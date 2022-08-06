@@ -2,26 +2,33 @@ package com.example.demo.controllers;
 
 
 import com.example.demo.moduls.Region;
+import com.example.demo.repositories.RegionRepository;
 import com.example.demo.services.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/regions")
+@ResponseBody
 public class Regioncontroller {
+    private final RegionRepository repository;
     private final RegionService regionService;
 
-    @GetMapping("regions/")
-    public String regions(@RequestParam(name="cq",required = false) String cq, Model model){
-        model.addAttribute("regions", regionService.listRegions(cq));
-        return "page";
+    @GetMapping("/info/fullsize/{cq}")
+    public Double getfullsizebycq(@PathVariable String cq){
+        return repository.FullSizeByCq(cq);
     }
-    @PostMapping("regions/create")
+    @GetMapping("/info/avgsize/{cq}")
+    public Double getAverageSize(@PathVariable String cq){
+        return repository.AvgSizeByCq(cq);
+            }
+
+
+    @PostMapping("/create")
     public String createRegions(Region region){
+
         regionService.saveRegion(region);
         return "redirect:/";
     }

@@ -2,14 +2,16 @@ package com.example.demo.moduls;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cadastralquarters")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cadastralquarters {
@@ -19,10 +21,6 @@ public class Cadastralquarters {
     private Long id;
     @Column(name = "CQ")
     private String cq;
-    @Column(name = "oks_counter")
-    private Integer Okscount;
-    @Column(name = "full_size")
-    private Double Fullsize;
-    @Column(name = "average_size")
-    private Double Averagesize;
+
+
 }

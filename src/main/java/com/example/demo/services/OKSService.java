@@ -1,30 +1,26 @@
 package com.example.demo.services;
 
+import com.example.demo.api.Apiegrn;
 import com.example.demo.moduls.OKS;
 import com.example.demo.repositories.OKSRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@ComponentScan("com.example.demo.api")
+
 public class OKSService {
     private final OKSRepository oksRepository;
 
-    public List<OKS> listOks(String cq) {
-        List<OKS> oks = oksRepository.findAll();
-        if (cq != null) oksRepository.findByCq(cq);
-        return oksRepository.findAll();
-    }
-    public Integer listOksCq(String cq){
-        return oksRepository.findAllByCq(cq).size();
-    }
+    private final Apiegrn apiegrn;
+
     public void saveOks(OKS oks){
         log.info("Saving new{}",oks);
+        oks.setCq(apiegrn.getCq());
         oksRepository.save(oks);
     }
-
 }

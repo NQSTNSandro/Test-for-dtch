@@ -1,11 +1,11 @@
 package com.example.demo.services;
 
+import com.example.demo.api.Apiegrn;
 import com.example.demo.moduls.Cadastralquarters;
-import com.example.demo.moduls.OKS;
 import com.example.demo.repositories.CadastralquartersRepository;
-import com.example.demo.repositories.OKSRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,11 +13,11 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@ComponentScan("com.example.demo.api")
 public class CadastralquartersService {
     private final CadastralquartersRepository cadastralquartersRepository;
-    private final OKSRepository oksRepository;
-    private final RegionService regionService;
-    private final OKSService oksService;
+
+    private final Apiegrn apiegrn;
     public List<Cadastralquarters> listCq(String cq){
         List<Cadastralquarters> cadastralquarters= cadastralquartersRepository.findAll();
         if (cq != null) cadastralquartersRepository.findByCq(cq);
@@ -27,10 +27,7 @@ public class CadastralquartersService {
 
     public  void  saveCq(Cadastralquarters cadastralquarters){
         log.info("Saving new{}",cadastralquarters);
-
-        cadastralquarters.setOkscount(oksService.listOksCq(cadastralquarters.getCq()));
-        cadastralquarters.setAveragesize(regionService.averageSize(cadastralquarters.getCq()));
-        cadastralquarters.setFullsize(regionService.fullSize(cadastralquarters.getCq()));
+        cadastralquarters.setCq(apiegrn.getCq());
         cadastralquartersRepository.save(cadastralquarters);
 
     }
