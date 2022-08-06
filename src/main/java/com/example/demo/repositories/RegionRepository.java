@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface RegionRepository extends JpaRepository<Region,Long> {
-    List<Region> findByCq(String cq);
+    List<Region> findAllByAdress(String adress);
     @Query(value = "SELECT avg(size) from Regions where cq=:cq")
     Double AvgSizeByCq(String cq);
     @Query(value = "select sum(size) from Regions where cq=:cq")
     Double FullSizeByCq(String cq);
+
+
 }

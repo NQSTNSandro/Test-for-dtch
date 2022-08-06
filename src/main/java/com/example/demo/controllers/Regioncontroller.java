@@ -24,7 +24,11 @@ public class Regioncontroller {
     public Double getAverageSize(@PathVariable String cq){
         return repository.AvgSizeByCq(cq);
             }
-
+ /*   @GetMapping("/info/{adress}")
+    public List<Region> all(String adress){
+        return repository.findAllByAdress(adress);
+    }
+*/
 
     @PostMapping("/create")
     public String createRegions(Region region){

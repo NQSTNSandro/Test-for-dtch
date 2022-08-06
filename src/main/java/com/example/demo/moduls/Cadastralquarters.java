@@ -21,6 +21,7 @@ public class Cadastralquarters {
     private Long id;
     @Column(name = "CQ")
     private String cq;
-
+    @Column(name="cudnum")
+    private String cudnum;
 
 }

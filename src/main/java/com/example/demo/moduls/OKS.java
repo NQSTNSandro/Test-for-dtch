@@ -20,4 +20,6 @@ public class OKS {
     private Long Id;
     @Column(name = "cq")
     private String cq;
+    @Column(name="cudnum")
+    private String cudnum;
 }

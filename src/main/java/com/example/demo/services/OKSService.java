@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -20,7 +23,14 @@ public class OKSService {
 
     public void saveOks(OKS oks){
         log.info("Saving new{}",oks);
-        oks.setCq(apiegrn.getCq());
-        oksRepository.save(oks);
+        List<String> cudnums=new ArrayList<>();
+        cudnums=apiegrn.getCudnums();
+        if(cudnums.size()>=2|| apiegrn.getCudnums().size()<2){
+        for(int i=0;i<3;i++) {
+            OKS obj = new OKS();
+            obj.setCudnum(cudnums.get(i));
+            obj.setCq(cudnums.get(i).substring(0, 13));
+            oksRepository.save(obj);
+        } }
+        }
     }
-}

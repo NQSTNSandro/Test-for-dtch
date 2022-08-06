@@ -24,4 +24,6 @@ public class Region {
     private String cq;
     @Column(name="adress")
     private String adress;
+    @Column(name="cudnum")
+    private String cudnum;
 }

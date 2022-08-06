@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -24,9 +27,21 @@ public class RegionService {
         log.info("Saving new{}", region);
         region.setAdress(apiDadata.cleanAddress(region.getAdress()).getResult());
         apiegrn.run(region.getAdress());
-        region.setCq(apiegrn.getCq());
-        region.setSize(apiegrn.getSize());
-        regionRepository.save(region);
+        List<String> cudnums = new ArrayList<>();
+        List<Double> sizes = new ArrayList<>();
+        cudnums = apiegrn.getCudnums();
+        sizes = apiegrn.getSize();
+        if(apiegrn.getCudnums().size()>=2|| apiegrn.getCudnums().size()<2) {
+            for (int i = 0; i < 3; i++) {
+                Region rgn = new Region();
+                rgn.setCudnum(cudnums.get(i));
+                rgn.setCq(cudnums.get(i).substring(0, 13));
+                rgn.setSize(sizes.get(i));
+                rgn.setAdress(region.getAdress());
+                regionRepository.save(rgn);
+            }
+        }
+
     }
 
 }

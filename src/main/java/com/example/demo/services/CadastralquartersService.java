@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,8 +28,15 @@ public class CadastralquartersService {
 
     public  void  saveCq(Cadastralquarters cadastralquarters){
         log.info("Saving new{}",cadastralquarters);
-        cadastralquarters.setCq(apiegrn.getCq());
-        cadastralquartersRepository.save(cadastralquarters);
-
+        List<String> cudnums=new ArrayList<>();
+        cudnums=apiegrn.getCudnums();
+        if(cudnums.size()>=2|| apiegrn.getCudnums().size()<2){
+        for(int i=0;i<3;i++){
+            Cadastralquarters obj=new Cadastralquarters();
+            obj.setCudnum(cudnums.get(i));
+            obj.setCq(cudnums.get(i).substring(0,13));
+            cadastralquartersRepository.save(obj);
+        }
+        }
+        }
     }
-}

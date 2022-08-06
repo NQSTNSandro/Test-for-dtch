@@ -11,16 +11,22 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Component
 public class Apiegrn {
      String cq;
-     Double size;
+     List<Double> size;
+     List<String> cudnums;
+     public List<String> getCudnums(){
+         return cudnums;
+     }
     public String getCq(){
         return cq;
     }
-    public Double getSize() {return size;}
+    public List<Double> getSize() {return size;}
     static String url_cq="https://apiegrn.ru/api/cadaster/search";
     static String url_size="https://apiegrn.ru/api/cadaster/objectInfoFull";
    @SneakyThrows
@@ -54,25 +60,37 @@ public class Apiegrn {
     public void run(String location){
                 String data = "{\n \"query\": \"" + location + "\",\n \"mode\": \"normal\",\n \"grouped\": 0\n}";
                 String msg;
+                cudnums=new ArrayList<>();
                 msg=connection(url_cq,data);
                 JSONObject obj = new JSONObject(msg);
                 JSONArray arr = obj.getJSONArray("objects");
                 for (int i = 0; i < arr.length(); i++) {
                     String cad = arr.getJSONObject(i).getString("CADNOMER");
                     cq = cad;
+                    cudnums.add(cad);
                 }
-                String data_2 = "{\n  \"query\": \""+cq+"\"\n}";
-                msg=connection(url_size,data_2);
-                String area="";
-                area=msg.substring(msg.indexOf("AREA"),msg.indexOf("CATEGORY"));
-                System.out.println();
-                Pattern pat=Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
-                Matcher matcher=pat.matcher(area);
-                area="";
-                while (matcher.find()) {
-                    area+=matcher.group();
-                };
-                size=Double.parseDouble(area);
+                String av;
+                av=cq.substring(0,13);
+                System.out.println(av+"\n");
+                System.out.println(cudnums);
+
+                size=new ArrayList<>();
+                if(cudnums.size()>5){
+                    for(int i=0;i<5;i++) {
+                        String data_2 = "{\n  \"query\": \"" + cudnums.get(i) + "\"\n}";
+                        msg = connection(url_size, data_2);
+                        String area = "";
+                        area = msg.substring(msg.indexOf("AREA"), msg.indexOf("CATEGORY"));
+                        System.out.println();
+                        Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
+                        Matcher matcher = pat.matcher(area);
+                        area = "";
+                        while (matcher.find()) {
+                            area += matcher.group();
+                        }
+                        ;
+                        size.add(Double.parseDouble(area));
+                    }
             }
-}
+}}
 
