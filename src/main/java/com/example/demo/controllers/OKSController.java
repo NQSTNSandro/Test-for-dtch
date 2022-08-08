@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class OKSController {
     private final OKSRepository repository;
+    //Возвращает кол-во окс в кад. квартале
     @GetMapping("/{cq}")
         public int getCQbyOks(@PathVariable String cq){
         return repository.findAllByCq(cq).size();

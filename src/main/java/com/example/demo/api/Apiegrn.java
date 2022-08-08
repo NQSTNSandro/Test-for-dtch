@@ -18,10 +18,10 @@ import java.util.regex.Pattern;
 @Component
 public class Apiegrn {
 
-     List<Double> size;
-     List<String> cudnums;
-     List<String> addresses;
-     public List<String> getCudnums(){
+    private List<Double> size;
+    private List<String> cudnums;
+    private List<String> addresses;
+    public List<String> getCudnums(){
          return cudnums;
      }
     public List<Double> getSize() {return size;}
@@ -69,25 +69,26 @@ public class Apiegrn {
 
                     String cad = arr.getJSONObject(i).getString("CADNOMER");
                     String adr=arr.getJSONObject(i).getString("ADDRESS");
+                    //Получаю список кад.номеров и их Адресов
                     cudnums.add(cad);
                     addresses.add(adr);
 
                 }
                 size=new ArrayList<>();
+                //Не стал заносить в отдельную функцию, т.к. это затычка, чтобы за один запрос к приложению не потратить все бесплатные запросы.
                 if(cudnums.size()>=3){
                     for(int i=0;i<3;i++) {
                         String data_2 = "{\n  \"query\": \"" + cudnums.get(i) + "\"\n}";
                         msg = connection(url_size, data_2);
                         String area = "";
                         area = msg.substring(msg.indexOf("AREA"), msg.indexOf("CATEGORY"));
-                        System.out.println();
                         Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
                         Matcher matcher = pat.matcher(area);
                         area = "";
                         while (matcher.find()) {
                             area += matcher.group();
                         }
-                        ;
+                        //Получаю размер
                         size.add(Double.parseDouble(area));
                     }
                 }
@@ -97,7 +98,6 @@ public class Apiegrn {
                         msg = connection(url_size, data_2);
                         String area = "";
                         area = msg.substring(msg.indexOf("AREA"), msg.indexOf("CATEGORY"));
-                        System.out.println();
                         Pattern pat = Pattern.compile("[-]?[0-9]+(.[0-9]+)?");
                         Matcher matcher = pat.matcher(area);
                         area = "";

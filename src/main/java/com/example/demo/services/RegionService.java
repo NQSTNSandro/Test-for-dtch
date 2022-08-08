@@ -41,6 +41,7 @@ public class RegionService {
         List<String> cudnums= apiegrn.getCudnums();
         List<Double> sizes = apiegrn.getSize();
         List<String> addresses=apiegrn.getAddresses();
+        //Ограничиваю кол-во сохраняемых объектов, т.к. ответом может прийти больше 50 кад. номеров, а запросов в день бесплатных 100. Это ограничение есть во всех сервисах и в apiegrn.
         if(cudnums.size()>=3)
             regionRepository.saveAll(createList(3,cudnums,sizes,addresses));
             else

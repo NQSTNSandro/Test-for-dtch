@@ -16,6 +16,7 @@ public class SavingController {
     private final RegionService regionService;
     private final OKSService oksService;
     private final CadastralquartersService cadastralquartersService;
+    //Собираю все в кучу и сохраняю.
     @PostMapping("save")
     public String createObj(Region region, OKS oks, Cadastralquarters cadastralquarters)
     {

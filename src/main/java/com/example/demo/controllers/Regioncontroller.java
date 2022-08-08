@@ -17,14 +17,17 @@ import java.util.List;
 @ResponseBody
 public class Regioncontroller {
     private final RegionRepository repository;
+    //Возвращает общий размер участков в кад. квартале
     @GetMapping("/info/fullsize/{cq}")
     public Double getfullsizebycq(@PathVariable String cq){
         return repository.FullSizeByCq(cq);
     }
+    //Возвращает средний размер участков в кад. квартале
     @GetMapping("/info/avgsize/{cq}")
     public Double getAverageSize(@PathVariable String cq){
         return repository.AvgSizeByCq(cq);
             }
+     //Выводит список кад.кварталов расположенных по адрессу.
     @GetMapping("/info/{adress}")
     public List<String> all(@PathVariable String adress){
         return  repository.findByAdressLike(adress);
