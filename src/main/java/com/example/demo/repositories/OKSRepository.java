@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OKSRepository extends JpaRepository<OKS,Long> {
-    List<OKS> findByCq(String cq);
     List<OKS> findAllByCq(String cq);
 
 }

@@ -22,7 +22,7 @@ public class Region {
     private Double size;
     @Column(name="cq")
     private String cq;
-    @Column(name="adress")
+    @Column(name="adress",unique = true)
     private String adress;
     @Column(name="cudnum")
     private String cudnum;

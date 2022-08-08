@@ -9,7 +9,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,26 +21,30 @@ public class RegionService {
     private final RegionRepository regionRepository;
     ApiDadata apiDadata=new ApiDadata();
     private final Apiegrn apiegrn;
+     private List<Region> createList(int size, List<String> cudnums,List<Double> sizes,List<String> addresses){
+         List<Region> list = new ArrayList<>();
+         for (int i = 0; i < size; i++) {
+                 Region rgn = new Region();
+                 rgn.setCudnum(cudnums.get(i));
+                 rgn.setCq(cudnums.get(i).substring(0, 13));
+                 rgn.setSize(sizes.get(i));
+                 rgn.setAdress(addresses.get(i));
+                 list.add(rgn);
+             }
+             return list;
+     }
     @SneakyThrows
     public void saveRegion(Region region) {
         log.info("Saving new{}", region);
         region.setAdress(apiDadata.cleanAddress(region.getAdress()).getResult());
         apiegrn.run(region.getAdress());
-        List<String> cudnums = new ArrayList<>();
-        List<Double> sizes = new ArrayList<>();
-        cudnums = apiegrn.getCudnums();
-        sizes = apiegrn.getSize();
-        if(apiegrn.getCudnums().size()>=2|| apiegrn.getCudnums().size()<2) {
-            for (int i = 0; i < 3; i++) {
-                Region rgn = new Region();
-                rgn.setCudnum(cudnums.get(i));
-                rgn.setCq(cudnums.get(i).substring(0, 13));
-                rgn.setSize(sizes.get(i));
-                rgn.setAdress(region.getAdress());
-                regionRepository.save(rgn);
-            }
-        }
-
+        List<String> cudnums= apiegrn.getCudnums();
+        List<Double> sizes = apiegrn.getSize();
+        List<String> addresses=apiegrn.getAddresses();
+        if(cudnums.size()>=3)
+            regionRepository.saveAll(createList(3,cudnums,sizes,addresses));
+            else
+                regionRepository.saveAll(createList(cudnums.size(),cudnums,sizes,addresses));
     }
 
 }

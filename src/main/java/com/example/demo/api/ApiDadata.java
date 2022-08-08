@@ -7,8 +7,8 @@ import ru.redcom.lib.integration.api.client.dadata.dto.Address;
 
 public class ApiDadata {
 
-    private static final String API_KEY="e95ad9803e084e983fb35708f21612d3370af2f0";
-    private static final String SECRET_KEY = "4d32436251fbd76728fa04e0b175a9f3aab2c0e3";
+    private static final String API_KEY="5c35012ae18b15896ce86d33403bc537d502ce36";
+    private static final String SECRET_KEY = "6f2d83c33f9e61a764dd1371b28c069813e6b13d";
     private final DaDataClient dadata= DaDataClientFactory.getInstance(API_KEY,SECRET_KEY);
     public Address cleanAddress(final String source) throws DaDataException {
         final Address a=dadata.cleanAddress(source);

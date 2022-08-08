@@ -24,19 +24,26 @@ public class CadastralquartersService {
         if (cq != null) cadastralquartersRepository.findByCq(cq);
         return cadastralquartersRepository.findAll();
     }
+    private List<Cadastralquarters> createList(int size, List<String> cudnums){
+        List<Cadastralquarters> list=new ArrayList<>();
+        for(int i=0;i<size;i++){
+            Cadastralquarters obj=new Cadastralquarters();
+            obj.setCudnum(cudnums.get(i));
+            obj.setCq(cudnums.get(i).substring(0,13));
+            list.add(obj);
+        }
+        return list;
+    }
+
 
 
     public  void  saveCq(Cadastralquarters cadastralquarters){
         log.info("Saving new{}",cadastralquarters);
-        List<String> cudnums=new ArrayList<>();
-        cudnums=apiegrn.getCudnums();
-        if(cudnums.size()>=2|| apiegrn.getCudnums().size()<2){
-        for(int i=0;i<3;i++){
-            Cadastralquarters obj=new Cadastralquarters();
-            obj.setCudnum(cudnums.get(i));
-            obj.setCq(cudnums.get(i).substring(0,13));
-            cadastralquartersRepository.save(obj);
+        List<String> cudnums=apiegrn.getCudnums();
+        if(cudnums.size()>=3){
+            cadastralquartersRepository.saveAll(createList(3,cudnums));
+        }else
+            cadastralquartersRepository.saveAll(createList(cudnums.size(),cudnums));
         }
-        }
-        }
-    }
+}
+
